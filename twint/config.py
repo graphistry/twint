@@ -85,4 +85,5 @@ class Config:
     Bearer_token: str = None
     Guest_token: str = None
     deleted: list = None
-    Utc: bool = True
+    Utc: bool = False
+    Full_text: bool = False
