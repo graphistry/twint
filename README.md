@@ -1,6 +1,3 @@
-20220207.0
-
-
 ## About this fork
 
 The original Twint repository has unexpectedly stopped accepting patches. Graphistry, as a contributor to [Project Domino](https://github.com/TheDataRideAlongs/ProjectDomino), has historically contributed patches to Twint as part of our ongoing efforts here. This maintenance fork is periodically updated to keep that project working.
