@@ -29,6 +29,9 @@ def User(ur):
             raise InvalidGuestTokenException('User data request failed: bad guest token - ' + nfo)
         logme.fatal(msg)
         raise KeyError(msg)
+    if 'legacy' not in ur['data']['user']:
+        logme.fatal('malformed json! legacy not in user payload: ' + str(ur))
+        raise KeyError('malformed json! legacy not in user payload: ' + str(ur))
     _usr = user()
     _usr.id = ur['data']['user']['rest_id']
     _usr.name = ur['data']['user']['legacy']['name']
