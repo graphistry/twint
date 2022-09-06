@@ -35,6 +35,10 @@ def User(ur):
         logme.fatal(msg)
         raise KeyError(msg)
     if 'legacy' not in ur['data']['user']:
+        try:
+            nfo = str(ur)
+        except:
+            nfo = '(failed to stringify user)'
         if 'User has been suspended' in nfo:
             raise SuspendedUser('User has been suspended')
         logme.fatal('malformed json! legacy not in user payload: ' + str(ur))
