@@ -1,5 +1,6 @@
 import datetime
 import logging as logme
+from .token import InvalidGuestTokenException
 
 
 class user:
@@ -24,6 +25,8 @@ def User(ur):
         except:
             nfo = '(failed to stringify user)'
         msg = 'malformed json! cannot be parsed to get user data for payload: ' + nfo
+        if 'Bad guest token' in nfo:
+            raise InvalidGuestTokenException('User data request failed: bad guest token - ' + nfo)
         logme.fatal(msg)
         raise KeyError(msg)
     _usr = user()
