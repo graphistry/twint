@@ -19,7 +19,11 @@ User_formats = {
 def User(ur):
     logme.debug(__name__ + ':User')
     if 'data' not in ur or 'user' not in ur['data']:
-        msg = 'malformed json! cannot be parsed to get user data'
+        try:
+            nfo = str(ur)
+        except:
+            nfo = '(failed to stringify user)'
+        msg = 'malformed json! cannot be parsed to get user data for payload: ' + nfo
         logme.fatal(msg)
         raise KeyError(msg)
     _usr = user()
