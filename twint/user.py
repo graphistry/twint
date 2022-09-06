@@ -3,6 +3,11 @@ import logging as logme
 from .token import InvalidGuestTokenException
 
 
+class SuspendedUser(Exception):
+    def __init__(self, msg):
+        super().__init__(msg)
+
+
 class user:
     type = "user"
 
@@ -30,6 +35,8 @@ def User(ur):
         logme.fatal(msg)
         raise KeyError(msg)
     if 'legacy' not in ur['data']['user']:
+        if 'User has been suspended' in nfo:
+            raise SuspendedUser('User has been suspended')
         logme.fatal('malformed json! legacy not in user payload: ' + str(ur))
         raise KeyError('malformed json! legacy not in user payload: ' + str(ur))
     _usr = user()
