@@ -133,7 +133,7 @@ async def RequestUrl(config, init):
             _url = await url.Favorites(config.Username, init)
         _serialQuery = _url
 
-    print('request url: %s' % _url)
+    print('RequestUrl request: %s' % _url)
     response = await Request(
         _url,
         params=params,
@@ -143,7 +143,7 @@ async def RequestUrl(config, init):
     )
 
     if config.Debug:
-        print(_serialQuery, file=open("twint-request_urls.log", "a", encoding="utf-8"))
+        print('getter %s' % _serialQuery, file=open("twint-request_urls.log", "a", encoding="utf-8"))
 
     return response
 
