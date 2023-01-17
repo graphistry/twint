@@ -133,6 +133,7 @@ async def RequestUrl(config, init):
             _url = await url.Favorites(config.Username, init)
         _serialQuery = _url
 
+    print('request url: %s' % _url)
     response = await Request(_url, params=params, connector=_connector, headers=_headers)
 
     if config.Debug:
