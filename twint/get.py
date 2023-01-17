@@ -139,7 +139,7 @@ async def RequestUrl(config, init):
         params=params,
         connector=_connector,
         headers=_headers,
-        timeout=aiohttp.ClientTimeout(total=config.Timeout_seconds),
+        timeout_seconds=config.Timeout_seconds
     )
 
     if config.Debug:
@@ -163,10 +163,11 @@ def ForceNewTorIdentity(config):
         sys.stderr.write('If you want to rotate Tor ports automatically - enable Tor control port\n')
 
 
-async def Request(_url, connector=None, params=None, headers=None):
+async def Request(_url, connector=None, params=None, headers=None, timeout_seconds=30):
     logme.debug(__name__ + ':Request:Connector')
     async with aiohttp.ClientSession(connector=connector, headers=headers) as session:
-        return await Response(session, _url, params)
+        return await Response(session, _url, params,
+            timeout=aiohttp.ClientTimeout(total=timeout_seconds)
 
 
 async def Response(session, _url, params=None):
