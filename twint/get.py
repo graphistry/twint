@@ -134,7 +134,13 @@ async def RequestUrl(config, init):
         _serialQuery = _url
 
     print('request url: %s' % _url)
-    response = await Request(_url, params=params, connector=_connector, headers=_headers)
+    response = await Request(
+        _url,
+        params=params,
+        connector=_connector,
+        headers=_headers,
+        timeout=aiohttp.ClientTimeout(total=config.Timeout_seconds),
+    )
 
     if config.Debug:
         print(_serialQuery, file=open("twint-request_urls.log", "a", encoding="utf-8"))
