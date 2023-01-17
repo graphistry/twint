@@ -164,6 +164,7 @@ async def Search(config, init):
     q = q.strip()
     params.append(("q", q))
     _serialQuery = _sanitizeQuery(url, params)
+    print('Search url: %s' % _serialQuery)
     return url, params, _serialQuery
 
 
