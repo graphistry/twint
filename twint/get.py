@@ -167,7 +167,7 @@ async def Request(_url, connector=None, params=None, headers=None, timeout_secon
     logme.debug(__name__ + ':Request:Connector')
     async with aiohttp.ClientSession(connector=connector, headers=headers) as session:
         return await Response(session, _url, params,
-            timeout=aiohttp.ClientTimeout(total=timeout_seconds)
+            timeout=aiohttp.ClientTimeout(total=timeout_seconds))
 
 
 async def Response(session, _url, params=None):
