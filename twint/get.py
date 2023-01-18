@@ -166,17 +166,16 @@ def ForceNewTorIdentity(config):
 async def Request(_url, connector=None, params=None, headers=None, timeout_seconds=30):
     logme.debug(__name__ + ':Request:Connector')
     async with aiohttp.ClientSession(connector=connector, headers=headers) as session:
-        return await Response(session, _url, params,
-            timeout=aiohttp.ClientTimeout(total=timeout_seconds))
+        return await Response(session, _url, params, timeout_seconds=timeout_seconds)
 
 
-async def Response(session, _url, params=None):
+async def Response(session, _url, params=None, timeout_seconds=30):
     logme.debug(__name__ + ':Response')
     retries = 5
     wait = 10  # No basis, maybe work with 0
     for attempt in range(retries + 1):
         try:
-            with timeout(120):
+            with timeout(timeout_seconds):
                 async with session.get(_url, ssl=True, params=params, proxy=httpproxy) as response:
                     resp = await response.text()
                     if response.status == 429:  # 429 implies Too many requests i.e. Rate Limit Exceeded
